@@ -40,4 +40,4 @@
         </td>
     </tr>
 </table>
-@Html.ActionLink("Go back to Employee List", "Index", "Employee")
+@Html.ActionLink("Go back to Employee List", "Index", new { departmentId = Model.DepartmentId })

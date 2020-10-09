@@ -7,18 +7,19 @@
     ViewBag.Title = "List of Employees";
 }
 
-<div style="font-family:Arial">
-    <h2>List of Employees</h2>
+    <div style="font-family:Arial">
+        <h2>List of Employees</h2>
 
-    <ul>
+        <ul>
 
-        @foreach (Employee emp in @Model)
-        {
-            <li>
-                @Html.ActionLink(emp.Name, "Details", new { id = emp.EmpID })
-            </li>
-        }
+            @foreach (Employee emp in @Model)
+            {
+                <li>
+                    @Html.ActionLink(emp.Name, "Details", new { id = emp.EmpID })
+                </li>
+            }
 
-    </ul>
+        </ul>
 
-</div>
+        @Html.ActionLink("Back to department List", "Index", "Department")
+    </div>

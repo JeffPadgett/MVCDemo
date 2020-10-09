@@ -19,13 +19,14 @@ namespace MVCdemo.Controllers
             return View(employee);
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int departmentId)
         {
 
             EmployeeContext employeeContext = new EmployeeContext();
-            List<Employee> employeeList = employeeContext.Employees.ToList();
+            List<Employee> employeeList = employeeContext.Employees.Where(emp => emp.DepartmentId == departmentId).ToList() ;
 
             return View(employeeList);
         }
+
     }
 }
