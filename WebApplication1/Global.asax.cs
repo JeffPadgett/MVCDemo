@@ -13,7 +13,7 @@ namespace MVCdemo
     {
         protected void Application_Start()
         {
-            Database.SetInitializer<MVCDemo.Models.EmployeeContext>(null);
+            //Database.SetInitializer<MVCDemo.Models.EmployeeContext>(null);
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

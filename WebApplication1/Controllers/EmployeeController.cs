@@ -3,30 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using MVCdemo.Models;
-using MVCDemo.Models;
+using BusinessLayer;
 
-namespace MVCdemo.Controllers
+namespace MVCDemo.Controllers
 {
     public class EmployeeController : Controller
     {
-        public ActionResult Details(int id)
+        public ActionResult Index()
         {
 
-            EmployeeContext employeeContext = new EmployeeContext();
-            Employee employee = employeeContext.Employees.Single(emp => emp.EmpID == id); 
-
-            return View(employee);
+            EmployeeBusinessLayer employeeBusinessLayer = new EmployeeBusinessLayer();
+            List<Employee> employees = employeeBusinessLayer.Employees.ToList();
+            return View(employees);
         }
 
-        public ActionResult Index(int departmentId)
+        [HttpGet]
+        public ActionResult Create()
         {
+            return View();
 
-            EmployeeContext employeeContext = new EmployeeContext();
-            List<Employee> employeeList = employeeContext.Employees.Where(emp => emp.DepartmentId == departmentId).ToList() ;
-
-            return View(employeeList);
         }
-
     }
 }
