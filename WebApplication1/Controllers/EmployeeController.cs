@@ -54,18 +54,21 @@ namespace MVCDemo.Controllers
 
         [HttpPost]
         [ActionName("Edit")]
-        public ActionResult Edit_Post(Employee employee)
+        public ActionResult Edit_Post(int id)
         {
-            TryUpdateModel(employee);
+            EmployeeBusinessLayer employeeBusinessLayer = new EmployeeBusinessLayer();
+
+            Employee employee = employeeBusinessLayer.Employees.Single(x => x.ID == id);
+            UpdateModel(employee, new string[] { "ID", "Gender", "City", "DateOfBirth" });
+
             if (ModelState.IsValid)
             {
-                EmployeeBusinessLayer employeeBusinessLayer = new EmployeeBusinessLayer();
                 employeeBusinessLayer.SaveEmployee(employee);
 
                 return RedirectToAction("Index");
             }
 
-            return View();
+            return View(employee);
         }
     }
 }
