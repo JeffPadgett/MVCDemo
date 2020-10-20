@@ -25,23 +25,47 @@ namespace MVCDemo.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(FormCollection formCollection)  
+        [ActionName("Create")]
+        public ActionResult Create_Post()
         {
 
             Employee employee = new Employee();
+            TryUpdateModel(employee);
+            if (ModelState.IsValid)
+            {
+                EmployeeBusinessLayer employeeBusinessLayer = new EmployeeBusinessLayer();
+                employeeBusinessLayer.AddEmployee(employee);
 
-            // Retrieve form data using form collection
-            employee.Name = formCollection["Name"];
-            employee.Gender = formCollection["Gender"];
-            employee.City = formCollection["City"];
-            employee.DateOfBirth = formCollection["DateOfBirth"];
+                return RedirectToAction("Index");
+            }
 
+            return View();
+
+        }
+
+
+        public ViewResult Edit(int id)
+        {
             EmployeeBusinessLayer employeeBusinessLayer = new EmployeeBusinessLayer();
+            Employee employee = employeeBusinessLayer.Employees.Single(emp => emp.ID == id);
 
-            employeeBusinessLayer.AddEmployee(employee);
+            return View(employee);
+        }
 
-            return RedirectToAction("Index");
+        [HttpPost]
+        [ActionName("Edit")]
+        public ActionResult Edit_Post(Employee employee)
+        {
+            TryUpdateModel(employee);
+            if (ModelState.IsValid)
+            {
+                EmployeeBusinessLayer employeeBusinessLayer = new EmployeeBusinessLayer();
+                employeeBusinessLayer.SaveEmployee(employee);
 
+                return RedirectToAction("Index");
+            }
+
+            return View();
         }
     }
 }
