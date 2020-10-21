@@ -12,6 +12,7 @@ namespace BusinessLayer
 {
     public class EmployeeBusinessLayer
     {
+
         public IEnumerable<Employee> Employees
         {
             get
@@ -32,7 +33,7 @@ namespace BusinessLayer
                         employee.Name = rdr["Name"].ToString();
                         employee.Gender = rdr["Gender"].ToString();
                         employee.City = rdr["City"].ToString();
-                        employee.DateOfBirth = rdr["DateOfBirth"].ToString().Replace("12:00:00 AM","");
+                        employee.DateOfBirth = rdr["DateOfBirth"].ToString().Replace("12:00:00 AM", "");
 
                         employees.Add(employee);
 

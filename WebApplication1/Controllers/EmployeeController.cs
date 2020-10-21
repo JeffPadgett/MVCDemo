@@ -57,9 +57,8 @@ namespace MVCDemo.Controllers
         public ActionResult Edit_Post(int id)
         {
             EmployeeBusinessLayer employeeBusinessLayer = new EmployeeBusinessLayer();
-
             Employee employee = employeeBusinessLayer.Employees.Single(x => x.ID == id);
-            UpdateModel(employee, new string[] { "ID", "Gender", "City", "DateOfBirth" });
+            UpdateModel<IEmployee>(employee);
 
             if (ModelState.IsValid)
             {
@@ -70,5 +69,6 @@ namespace MVCDemo.Controllers
 
             return View(employee);
         }
+
     }
 }
